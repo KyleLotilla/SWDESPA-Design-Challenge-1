@@ -30,4 +30,9 @@ public class CalendarEventList extends Subject {
 	public ArrayList<CalendarEvent> getCalendarEventList() {
 		return ceEvents;
 	}
+	
+	public void setCalendarEventList(ArrayList<CalendarEvent> ceEvents) {
+		this.ceEvents = ceEvents;
+		notifyObservers();
+	}
 }
