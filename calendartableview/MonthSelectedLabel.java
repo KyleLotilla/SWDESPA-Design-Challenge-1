@@ -7,7 +7,7 @@ import model.Subject;
 import observers.Observer;
 
 public class MonthSelectedLabel extends JLabel implements Observer {
-	private String sMonths[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};;
+	private String sMonths[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	
 	public MonthSelectedLabel (MonthSelected msMonth) {
 		super();

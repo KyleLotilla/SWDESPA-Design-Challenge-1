@@ -31,4 +31,16 @@ public class CalendarEvent {
 	public Color getColor () {
 		return cColor;
 	}
+	
+	public int getMonth() {
+		return nMonth;
+	}
+	
+	public int getYear() {
+		return nYear;
+	}
+	
+	public int getDay() {
+		return nDay;
+	}
 }

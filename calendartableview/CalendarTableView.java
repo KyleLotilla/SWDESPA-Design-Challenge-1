@@ -5,6 +5,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import controller.AddEventBtn;
+import controller.NextMonthBtn;
+import controller.PrevMonthBtn;
+import controller.YearCmb;
 import model.CalendarEventList;
 import model.MonthSelected;
 import model.YearSelected;
@@ -20,6 +24,7 @@ public class CalendarTableView extends JPanel {
 	private NextMonthBtn nbtnNext;
 	private PrevMonthBtn pbtnPrev;
 	private YearCmb ycmbYear;
+	private AddEventBtn aebEvent;
 	
 	public CalendarTableView (MonthSelected msMonth, YearSelected ysYear, CalendarEventList celEvents) {
 		super(null);
@@ -52,6 +57,9 @@ public class CalendarTableView extends JPanel {
 		super.add(ycmbYear);
 		ycmbYear.setBounds(460, 610, 160, 40);
 		
+		aebEvent = new AddEventBtn(msMonth, ysYear, celEvents);
+		super.add(aebEvent);
+		aebEvent.setBounds(220, 610, 160, 40);
 	}
 	
 	public CalendarModelTable getCalendarModel() {

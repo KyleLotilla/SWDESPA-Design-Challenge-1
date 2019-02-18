@@ -17,7 +17,10 @@ import calendartableview.CalendarTableView;
 import model.CalendarEventList;
 import model.MonthSelected;
 import model.YearSelected;
+import notifications.FBAdapter;
+import notifications.SMSAdapter;
 import observers.ColorEventViewObserver;
+import observers.EventNotificationObserver;
 import observers.MonthTableViewObserver;
 import observers.YearTableViewObserver;
 import renderer.ColorEventViewRenderer;
@@ -37,11 +40,12 @@ public class CalendarProgram{
 	private CalendarWindow cwWindow;
 	private CalendarTableView ctvTableView;
 	private ColorEventViewRenderer cevrTableRenderer;
+	
+	   /**** Observers ****/
 	private MonthTableViewObserver mtvoMonthObserver;
 	private YearTableViewObserver ytvoYearObserver;
 	private ColorEventViewObserver cevoEventsObserver;
-	
-	
+	private EventNotificationObserver cnoNotificationObserver;
         
 	public CalendarProgram() {
 		GregorianCalendar gcCal = new GregorianCalendar();
@@ -57,12 +61,17 @@ public class CalendarProgram{
 		mtvoMonthObserver = new MonthTableViewObserver(cevrTableRenderer);
 		ytvoYearObserver = new YearTableViewObserver(cevrTableRenderer);
 		cevoEventsObserver = new ColorEventViewObserver(cevrTableRenderer);
+		cnoNotificationObserver = new EventNotificationObserver();
 		
 		msMonth.attach(mtvoMonthObserver);
 		msMonth.attach(ctvTableView.getMonthSelectedLabel());
 		ysYear.attach(ytvoYearObserver);
 		ysYear.attach(ctvTableView.getYearCmb());
 		celCalendarEvents.attach(cevoEventsObserver);
+		celCalendarEvents.attach(cnoNotificationObserver);
+		
+		cnoNotificationObserver.addAdapters(new SMSAdapter());
+		cnoNotificationObserver.addAdapters(new FBAdapter());
 		
 		cwWindow.setResizable(false);
 		cwWindow.setVisible(true);

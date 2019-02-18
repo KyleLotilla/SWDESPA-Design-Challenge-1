@@ -41,18 +41,19 @@ public class ColorEventViewRenderer extends CalendarTableViewRenderer {
 			
 			for (int j = 0; j < ceEvents.size() && !bEventFound; j++)
 				if (ceEvents.get(j).equalToEventDate(nMonth, i, nYear)) {
-					cmtCalendarModel.setValueAt(i + "\n" + ceEvents.get(j).getEventName(), row, column);
+					cmtCalendarModel.setValueAt("<html>" + i + "<br>" + ceEvents.get(j).getEventName() + "</html>", row, column);
 					bEventFound = true;
 				}
 			if (!bEventFound)
-				cmtCalendarModel.setValueAt(i + "\n", row, column);
+				cmtCalendarModel.setValueAt("<html>" + i + "<br>" + "</html>", row, column);
 				
 		}
 	}
 
 	public void renderTable() {
 		CalendarTable ctCalendarTable = ctvTableView.getCalendarTable();
-		ctCalendarTable.setDefaultRenderer(ctCalendarTable.getColumnClass(0), new TableRenderer (nMonth, nYear, ceEvents));
+		CalendarModelTable cmtCalendarModel = ctvTableView.getCalendarModel();
+		ctCalendarTable.setDefaultRenderer(ctCalendarTable.getColumnClass(0), new TableRenderer (nMonth, nYear, ceEvents, cmtCalendarModel));
 	}
 	
 	
