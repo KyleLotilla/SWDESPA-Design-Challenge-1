@@ -6,11 +6,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controller.AddEventBtn;
+import controller.EventAdderWindowView;
 import controller.ImportBtn;
 import controller.NextMonthBtn;
 import controller.PrevMonthBtn;
 import controller.YearCmb;
 import importevents.CSVImporter;
+import importevents.PSVImporter;
 import model.CalendarEventList;
 import model.MonthSelected;
 import model.YearSelected;
@@ -19,7 +21,6 @@ import java.util.*;
 
 public class CalendarTableView extends JPanel {
 	private MonthSelectedLabel mslMonthLabel;
-	private JLabel labelYear;
 	private CalendarModelTable cmtCalendarModel;
 	private CalendarTable ctCalendarTable;
 	private JScrollPane scrollCalendarPane;
@@ -28,11 +29,12 @@ public class CalendarTableView extends JPanel {
 	private YearCmb ycmbYear;
 	private AddEventBtn aebEvent;
 	private ImportBtn ibImportCSV;
+	private ImportBtn ibImportPSV;
 	
 	public CalendarTableView (MonthSelected msMonth, YearSelected ysYear, CalendarEventList celCalendarEvents) {
 		super(null);
 		setBorder(BorderFactory.createTitledBorder("Calendar"));
-		setBounds(0, 0, 640, 670);
+		setBounds(0, 0, 1440, 1080);
 		
 		mslMonthLabel = new MonthSelectedLabel(msMonth);
 		add(mslMonthLabel);
@@ -43,10 +45,6 @@ public class CalendarTableView extends JPanel {
 		add(scrollCalendarPane);
 		ctCalendarTable.getParent().setBackground(ctCalendarTable.getBackground());
 		scrollCalendarPane.setBounds(20, 100, 600, 500);
-		
-		labelYear = new JLabel("Change Year:");
-		add(labelYear);
-		labelYear.setBounds(20, 610, 160, 40);
 		
 		nbtnNext = new NextMonthBtn(msMonth, ysYear);
 		add(nbtnNext);
@@ -60,13 +58,18 @@ public class CalendarTableView extends JPanel {
 		add(ycmbYear);
 		ycmbYear.setBounds(460, 610, 160, 40);
 		
-		aebEvent = new AddEventBtn(msMonth, ysYear, celCalendarEvents);
+		aebEvent = new AddEventBtn(new EventAdderWindowView(celCalendarEvents, msMonth, ysYear));
 		add(aebEvent);
-		aebEvent.setBounds(220, 610, 160, 40);
+		aebEvent.setBounds(460, 660, 160, 40);
 		
 		ibImportCSV = new ImportBtn("Import CSV", new CSVImporter(), celCalendarEvents);
 		add(ibImportCSV);
-		ibImportCSV.setBounds(120, 610, 160, 40);
+		ibImportCSV.setBounds(50, 610, 160, 40);
+		
+		ibImportPSV = new ImportBtn("Import PSV", new PSVImporter(), celCalendarEvents);
+		add(ibImportPSV);
+		ibImportPSV.setBounds(250, 610, 160, 40);
+		
 	}
 	
 	public CalendarModelTable getCalendarModel() {

@@ -7,22 +7,17 @@ import javax.swing.*;
 import model.*;
 
 public class AddEventBtn extends JButton {
-	private MonthSelected msMonth;
-	private YearSelected ysYear;
-	private CalendarEventList celCalendarEvents;
+	private EventAdder eaAdder;
 	
-	public AddEventBtn (MonthSelected msMonth, YearSelected ysYear, CalendarEventList celCalendarEvents) {
+	public AddEventBtn (EventAdder eaAdder) {
 		super("Add Event");
-		this.msMonth = msMonth;
-		this.ysYear = ysYear;
-		this.celCalendarEvents = celCalendarEvents;
+		this.eaAdder = eaAdder;
 		addActionListener(new AddEventListener());
 	}
 	
 	private class AddEventListener implements ActionListener {
 		public void actionPerformed(ActionEvent aeAction) {
-			AddEventWindow aewEventWindow = new AddEventWindow(celCalendarEvents, msMonth.getMonth(), ysYear.getYear());
-			aewEventWindow.setVisible(true);
+			eaAdder.addEvent();
 		}
 	}
 }

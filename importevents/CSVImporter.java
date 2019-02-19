@@ -13,8 +13,8 @@ import controller.ColorString;
 import model.CalendarEvent;
 
 public class CSVImporter extends EventImporter{
-
 	private File fImportedCSV;
+	private Scanner scScanCSV;
 	
 	public void openData() {
 		JFileChooser fileChooserCSV = new JFileChooser();
@@ -33,31 +33,31 @@ public class CSVImporter extends EventImporter{
 	
 	public ArrayList<CalendarEvent> parseData() {
 		ArrayList<CalendarEvent> ceEvents = new ArrayList<CalendarEvent>();
+		scScanCSV = null;
 		if (fImportedCSV == null)
 			ceEvents = null;
 		else {
 			try {
-			Scanner scScanner = null;
-			scScanner = new Scanner(fImportedCSV);
+				scScanCSV = new Scanner(fImportedCSV);
 			
-			while (scScanner.hasNextLine()) {
-				String sEvent = scScanner.nextLine();
-				String sSeparated[] = sEvent.split(",");
-				String sDate[] = sSeparated[0].split("/");
-				String sColor = (sSeparated[2].toUpperCase()).replaceAll(" ", "");
-				Color cColor = (ColorString.valueOf(sColor)).getColor();
-				
-				ceEvents.add(new CalendarEvent(Integer.parseInt(sDate[0]) - 1, Integer.parseInt(sDate[1]), Integer.parseInt(sDate[2]), cColor, sSeparated[1]));
-			}
-			scScanner.close();
-			} catch (FileNotFoundException e) {
-			}
+				while (scScanCSV.hasNextLine()) {
+					String sEvent = scScanCSV.nextLine();
+					String sSeparated[] = sEvent.split(",");
+					String sDate[] = sSeparated[0].split("/");
+					String sColor = (sSeparated[2].toUpperCase()).replaceAll(" ", "");
+					Color cColor = (ColorString.valueOf(sColor)).getColor();
+					
+					ceEvents.add(new CalendarEvent(Integer.parseInt(sDate[0]) - 1, Integer.parseInt(sDate[1]), Integer.parseInt(sDate[2]), cColor, sSeparated[1]));
+				}
+			} catch (FileNotFoundException e) {}
 		}
 		return ceEvents;
 	}
 
 	
 	public void closeData() {
+		if (scScanCSV != null)
+			scScanCSV.close();
 	}
 	
 }

@@ -47,7 +47,6 @@ public class AddEventWindow extends JFrame {
 			cmbYear.addItem(String.valueOf(i));
 		cmbYear.setSelectedItem(String.valueOf(nYear));
 		
-		
 		add(new JLabel("Day:"));
 		cmbDay = new JComboBox();
 		filterDayItems();
@@ -68,6 +67,8 @@ public class AddEventWindow extends JFrame {
 		cmbMonth.addActionListener(cewlListener);
 		cmbYear.addActionListener(cewlListener);
 		btnSubmit.addActionListener(cewlListener);
+		
+		setVisible(true);
 	}
 	
 	private void filterDayItems() {
