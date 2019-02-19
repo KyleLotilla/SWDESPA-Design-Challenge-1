@@ -7,7 +7,7 @@ public class FBAdapter implements EventNotifier {
 
 	public void notifyEvent(CalendarEvent ceEvent) {
 		FBView fbWindow = new FBView();
-		fbWindow.showNewEvent(ceEvent.getEventName(), ceEvent.getMonth(), ceEvent.getDay(), ceEvent.getYear(), ceEvent.getColor());
+		fbWindow.showNewEvent(ceEvent.getEventName(), ceEvent.getMonth() + 1, ceEvent.getDay(), ceEvent.getYear(), ceEvent.getColor());
 	}
 	
 }
